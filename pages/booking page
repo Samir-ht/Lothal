@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Adventure Cove Waterpark Ticket</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg mt-10 p-6">
+    
+    <!-- Image -->
+    <img src="https://your-image-url.com/adventure-cove.jpg" alt="Adventure Cove" class="w-full rounded-lg mb-5">
+
+    <!-- Title -->
+    <h1 class="text-2xl font-bold text-gray-800 mb-3">Adventure Cove Waterpark One-Day Ticket</h1>
+
+    <!-- Ticket Type Buttons -->
+    <div class="flex gap-3 mb-4">
+      <button class="px-4 py-1 bg-gray-300 text-gray-700 rounded-full font-semibold">Standard</button>
+      <button class="px-4 py-1 bg-gray-100 text-gray-700 border border-gray-300 rounded-full font-semibold">Local</button>
+    </div>
+
+    <!-- Age Groups -->
+    <ul class="list-disc list-inside text-gray-700 mb-2">
+      <li>Adult (Ages 13 and above)</li>
+      <li>Child (Ages 4 to 12)</li>
+    </ul>
+    <p class="text-gray-500 mb-2">Ticket valid for 7 days from selected date.</p>
+    <a href="#" class="text-blue-600 underline">Terms and Conditions</a>
+
+    <!-- Ticket Counters -->
+    <div class="grid grid-cols-2 gap-8 mt-6">
+      <!-- Adult -->
+      <div>
+        <p class="font-semibold mb-1 text-gray-700">Adult</p>
+        <div class="flex items-center justify-between border rounded px-4 py-2 w-36">
+          <button onclick="updateCount('adult', -1)" class="text-xl font-bold">−</button>
+          <span id="adult-count" class="text-lg">0</span>
+          <button onclick="updateCount('adult', 1)" class="text-xl font-bold">+</button>
+        </div>
+        <p class="text-sm text-gray-600 mt-1">SGD40.00 per pax</p>
+      </div>
+
+      <!-- Child -->
+      <div>
+        <p class="font-semibold mb-1 text-gray-700">Child</p>
+        <div class="flex items-center justify-between border rounded px-4 py-2 w-36">
+          <button onclick="updateCount('child', -1)" class="text-xl font-bold">−</button>
+          <span id="child-count" class="text-lg">0</span>
+          <button onclick="updateCount('child', 1)" class="text-xl font-bold">+</button>
+        </div>
+        <p class="text-sm text-gray-600 mt-1">SGD32.00 per pax</p>
+      </div>
+    </div>
+
+    <!-- Total and Checkout -->
+    <div class="flex justify-between items-center border-t mt-6 pt-4">
+      <p class="text-lg font-semibold text-gray-800">Total <span id="total-price" class="underline">SGD0.00</span></p>
+      <button id="checkout" class="px-5 py-2 rounded bg-gray-200 text-gray-400 cursor-not-allowed" disabled>
+        Check Out
+      </button>
+    </div>
+
+    <!-- Back Link -->
+    <div class="mt-4">
+      <a href="#" class="text-lg text-black underline font-semibold">Back</a>
+    </div>
+  </div>
+
+  <script>
+    let adultCount = 0;
+    let childCount = 0;
+
+    function updateCount(type, delta) {
+      if (type === 'adult') {
+        adultCount = Math.max(0, adultCount + delta);
+        document.getElementById('adult-count').innerText = adultCount;
+      } else {
+        childCount = Math.max(0, childCount + delta);
+        document.getElementById('child-count').innerText = childCount;
+      }
+      updateTotal();
+    }
+
+    function updateTotal() {
+      const total = adultCount * 40 + childCount * 32;
+      document.getElementById('total-price').innerText = `SGD${total.toFixed(2)}`;
+
+      const checkoutBtn = document.getElementById('checkout');
+      if (total > 0) {
+        checkoutBtn.disabled = false;
+        checkoutBtn.classList.remove('bg-gray-200', 'text-gray-400', 'cursor-not-allowed');
+        checkoutBtn.classList.add('bg-blue-600', 'text-white');
+      } else {
+        checkoutBtn.disabled = true;
+        checkoutBtn.classList.add('bg-gray-200', 'text-gray-400', 'cursor-not-allowed');
+        checkoutBtn.classList.remove('bg-blue-600', 'text-white');
+      }
+    }
+  </script>
+</body>
+</html>
