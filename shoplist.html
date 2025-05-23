@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop List</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f9f9;
+      padding: 2rem;
+    }
+    .shop-page {
+      display: flex;
+      gap: 2rem;
+    }
+    .shop-list {
+      width: 30%;
+    }
+    .shop-details {
+      width: 70%;
+    }
+    .shop-name {
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      background-color: #e0e0e0;
+      border-radius: 4px;
+    }
+    .shop-name:hover {
+      background-color: #d0d0d0;
+    }
+    .shop-info img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+    .shop-info {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="shop-page">
+    <div class="shop-list">
+      <div class="shop-name" onclick="showShopDetails('shop1')">Souvenir Shop ▶</div>
+      <div class="shop-name" onclick="showShopDetails('shop2')">Maritime Apparel ▶</div>
+    </div>
+    <div class="shop-details" id="shopDetails">
+    </div>
+  </div>
+
+  <script>
+    function showShopDetails(shopId) {
+      const details = {
+        shop1: {
+          name: 'Souvenir Shop',
+          img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80',
+          products: 'Handcrafted items, miniatures, local art',
+          cost: 'Affordable',
+          rating: '4.5/5'
+        },
+        shop2: {
+          name: 'Maritime Apparel',
+          img: 'https://images.unsplash.com/photo-1555529669-e69c8a0e7c95?auto=format&fit=crop&w=800&q=80',
+          products: 'T-shirts, caps, jackets with maritime themes',
+          cost: 'Moderate',
+          rating: '4.2/5'
+        }
+      };
+
+      const shop = details[shopId];
+      const container = document.getElementById('shopDetails');
+      container.innerHTML = `
+        <div class="shop-info">
+          <h2>${shop.name}</h2>
+          <img src="${shop.img}" alt="${shop.name}" />
+          <p><strong>Products:</strong> ${shop.products}</p>
+          <p><strong>Cost:</strong> ${shop.cost}</p>
+          <p><strong>Customer Rating:</strong> ${shop.rating}</p>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
